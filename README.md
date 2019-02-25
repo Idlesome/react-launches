@@ -1,7 +1,11 @@
 ## TODO
 
+Live demo at: [https://idlesome.github.io/react-launches](https://idlesome.github.io/)react-launches
+
 - Refactor launch card items into `LaunchCard` and `Launches` into `LaunchCardList`.
 - Refactor and improve tests
+
+##
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
