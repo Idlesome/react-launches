@@ -1,6 +1,6 @@
 ## TODO
 
-Live demo at: [https://idlesome.github.io/react-launches](https://idlesome.github.io/)react-launches
+Live demo at: [https://idlesome.github.io/react-launches](https://idlesome.github.io/)
 
 - Refactor launch card items into `LaunchCard` and `Launches` into `LaunchCardList`.
 - Refactor and improve tests
