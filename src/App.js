@@ -1,8 +1,7 @@
-import React from 'react';
+import React from "react";
 
-import Launches from './Launches'
+import LaunchesContainer from "components/LaunchesContainer";
 
-const App = () =>
-    <Launches />
+const App = () => <LaunchesContainer />;
 
 export default App;

@@ -7,13 +7,13 @@ import { createMount } from "@material-ui/core/test-utils";
 import Enzyme, { shallow } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 
-import Launches from "./Launches";
+import LaunchesContainer from "./LaunchesContainer";
 
-import mock from "./Launches.mock.json";
+import mock from "./launches.mock.json";
 
 Enzyme.configure({ adapter: new Adapter() });
 
-describe("<Launches />", () => {
+describe("<LaunchesContainer />", () => {
   let mount;
 
   const promise = Promise.resolve(mock);
@@ -22,7 +22,7 @@ describe("<Launches />", () => {
     mount = createMount();
     sinon
       .stub(axios, "get")
-      .withArgs("https://api.spacexdata.com/v3/launches?limit=6")
+      .withArgs("https://api.spacexdata.com/v3/launches", { limit: 6 })
       .returns(promise);
   });
 
@@ -32,22 +32,23 @@ describe("<Launches />", () => {
   });
 
   it("stores data in local state", done => {
-    // shallow/.get is a HOC workaround
-    const wrapper = mount(shallow(<Launches />).get(0));
+    // shallow/.get is a HOC workaround for state
+    const wrapper = mount(shallow(<LaunchesContainer />).get(0));
 
     promise.then(() => {
       wrapper.update();
 
-      expect(wrapper.state().data).toEqual(mock.data);
+      expect(wrapper.state("launches")).toEqual(mock.data);
 
       done();
     });
   });
 
   it("renders data when fetched successfully", done => {
-    const wrapper = mount(<Launches />);
+    // shallow/.get is a HOC workaround for state
+    const wrapper = mount(shallow(<LaunchesContainer />).get(0));
 
-    expect(wrapper.find("p").text()).toEqual("Loading");
+    expect(wrapper.state("loading")).toEqual(true);
 
     promise.then(() => {
       wrapper.update();
