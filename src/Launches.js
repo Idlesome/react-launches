@@ -122,7 +122,7 @@ class Launches extends React.Component {
 
     return (
       <div className={classes.layout}>
-        <Grid container spacing={32}>
+        <Grid container spacing={4}>
           <Grid item xs={12}>
             <TextField
               id="launch-filter"

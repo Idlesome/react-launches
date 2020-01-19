@@ -4,14 +4,14 @@ import sinon from "sinon";
 
 import { createMount } from "@material-ui/core/test-utils";
 
-import { configure, shallow } from "enzyme";
+import Enzyme, { shallow } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 
 import Launches from "./Launches";
 
 import mock from "./Launches.mock.json";
 
-configure({ adapter: new Adapter() });
+Enzyme.configure({ adapter: new Adapter() });
 
 describe("<Launches />", () => {
   let mount;
