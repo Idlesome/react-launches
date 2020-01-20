@@ -1,14 +1,11 @@
 /**
- * Functional component version of LaunchesContainer. Decided to go with
- * a class based component to support testing state and API calls from
- * within the component. Usually I would use redux sagas for API calls.
+ * Saga style Launches Page component which uses redux to dispatch
+ * the api request
  *
  */
 
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-
-import axios from "axios";
 
 import { withStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
@@ -18,8 +15,6 @@ import Button from "@material-ui/core/Button";
 import TextFilter from "components/TextFilter";
 import LaunchCard from "components/LaunchCard/";
 import Loading from "components/Loading";
-
-const SPACEWATCH_LAUNCHES_ENDPOINT = "https://api.spacexdata.com/v3/launches";
 
 const styles = {
   layout: {
@@ -32,16 +27,19 @@ const styles = {
   }
 };
 
-function LaunchesContainer(props) {
-  const [loading, setLoading] = useState(null);
-  const [launches, setLaunches] = useState([]);
-  const [error, setError] = useState(null);
+function LaunchesPage(props) {
+  const {
+    launches,
+    dispatchLoadLaunches,
+    error,
+    loading,
+    // Limit launches loaded to default of 6
+    // This will also indicate "Load More" button to load 6 more launches
+    limit = 6
+  } = props;
+
   const [textFilter, setTextFilter] = useState("");
   const [offset, setOffset] = useState(0);
-
-  // Limit launches loaded to default of 6
-  // This will also indicate "Load More" button to load 6 more launches
-  const { limit = 6 } = props;
 
   // Load launches on mount
   useEffect(() => {
@@ -50,30 +48,21 @@ function LaunchesContainer(props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  /**
+   * Loads launches. After first call it loads 6 more
+   *
+   * @param {Object} params optionally override params offset and limit
+   */
   const loadLaunches = (params = {}) => {
-    setLoading(true);
-    axios
-      .get(SPACEWATCH_LAUNCHES_ENDPOINT, {
-        params: {
-          limit,
-          ...params
-        }
-      })
-      .then(result => {
-        // Append new data onto current data
-        setLaunches(launches.concat(result.data));
-        setLoading(false);
-        // Increase offset
-        setOffset(offset + limit);
-      })
-      .catch(error => {
-        setError(error);
-        setLoading(false);
-      });
+    // Increase offset
+    setOffset(offset + limit);
+    // Dispatch load event
+    dispatchLoadLaunches({ params: { offset, limit, ...params } });
   };
 
-  const loadMore = () => {
-    loadLaunches({ offset: offset + limit });
+  /** Load More button event handler */
+  const onLoadMore = () => {
+    loadLaunches();
   };
 
   /** Filter launches based on available filters */
@@ -120,7 +109,7 @@ function LaunchesContainer(props) {
             disabled={loading}
             variant="outlined"
             className={classes.button}
-            onClick={loadMore}>
+            onClick={onLoadMore}>
             Load More
           </Button>
         </Grid>
@@ -129,8 +118,8 @@ function LaunchesContainer(props) {
   );
 }
 
-LaunchesContainer.propTypes = {
+LaunchesPage.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(LaunchesContainer);
+export default withStyles(styles)(LaunchesPage);

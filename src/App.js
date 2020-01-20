@@ -1,7 +1,17 @@
 import React from "react";
 
-import LaunchesContainer from "components/LaunchesContainer";
+import { Provider } from "react-redux";
 
-const App = () => <LaunchesContainer />;
+import Launches from "containers/Launches";
+
+import configureStore from "./init";
+
+const store = configureStore();
+
+const App = () => (
+  <Provider store={store}>
+    <Launches />
+  </Provider>
+);
 
 export default App;

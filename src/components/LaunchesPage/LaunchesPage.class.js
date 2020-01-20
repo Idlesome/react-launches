@@ -31,7 +31,7 @@ const styles = {
 
 // Write tests, prop types, and document prop types
 // and components
-class LaunchesContainer extends React.Component {
+class LaunchesPage extends React.Component {
   constructor(props) {
     super(props);
 
@@ -60,8 +60,7 @@ class LaunchesContainer extends React.Component {
       () => {
         axios
           .get(SPACEWATCH_LAUNCHES_API, {
-            limit: this.limit,
-            ...params
+            params: { limit: this.limit, ...params }
           })
           .then(result => {
             this.setState({
@@ -146,8 +145,8 @@ class LaunchesContainer extends React.Component {
   }
 }
 
-LaunchesContainer.propTypes = {
+LaunchesPage.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(LaunchesContainer);
+export default withStyles(styles)(LaunchesPage);
