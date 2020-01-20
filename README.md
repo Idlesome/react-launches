@@ -8,8 +8,6 @@ making more use of functional components and updated to react 16.12.0.
 
 - Build in storybook with addons
 - Use translation functions instead of hard text
-- Build a showcase for redux and redux sagas for API calls instead of doing API
-  calls directly from the component
 
 ---
 
