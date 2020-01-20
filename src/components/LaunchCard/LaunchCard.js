@@ -78,14 +78,19 @@ function LaunchCard(props) {
   );
 }
 LaunchCard.propTypes = {
-  /** links object from SpaceX API containing mission_patch_small */
+  /** links object from SpaceX API */
   links: PropTypes.shape({
+    /** Mission patch image URL */
     mission_patch_small: PropTypes.string,
+    /** Array of Flickr launch images URL. Only the first is used */
     flickr_images: PropTypes.array
   }),
 
+  /** Mission name */
   mission_name: PropTypes.string.isRequired,
+  /** Year of launch */
   launch_year: PropTypes.string.isRequired,
+  /** Extra details of launch */
   details: PropTypes.string
 };
 
