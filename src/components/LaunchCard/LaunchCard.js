@@ -1,3 +1,10 @@
+/**
+ * A basic Card that displays SpaceX launch details including:
+ * - Flickr launch image if available,
+ * - Mission patch image,
+ * - Mission name
+ * - Launch year
+ */
 import React from "react";
 import PropTypes from "prop-types";
 
@@ -71,10 +78,12 @@ function LaunchCard(props) {
   );
 }
 LaunchCard.propTypes = {
+  /** links object from SpaceX API containing mission_patch_small */
   links: PropTypes.shape({
-    mission_patch_small: PropTypes.string.isRequired,
-    flickr_images: PropTypes.array.isRequired
+    mission_patch_small: PropTypes.string,
+    flickr_images: PropTypes.array
   }),
+
   mission_name: PropTypes.string.isRequired,
   launch_year: PropTypes.string.isRequired,
   details: PropTypes.string
