@@ -11,7 +11,7 @@ making more use of functional components and updated to react 16.12.0.
 
 
 
-Note: The redux/sagas/selectors part of this project is overkill for a project this size and is intended as an example of how it might look in a larger project.
+Note: The redux/sagas/selectors part of this project is perhaps overkill for a project this size and is intended as an example of how it might look in a larger project.
 
 ---
 
