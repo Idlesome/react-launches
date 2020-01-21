@@ -9,6 +9,10 @@ making more use of functional components and updated to react 16.12.0.
 - Build in storybook with addons
 - Use translation functions instead of hard text
 
+
+
+Note: The redux/sagas/selectors part of this project is overkill for a project this size and is intended as an example of how it might look in a larger project.
+
 ---
 
 This project was bootstrapped with
